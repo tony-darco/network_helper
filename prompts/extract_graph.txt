@@ -1,0 +1,419 @@
+
+-Goal-
+Given a text document that is potentially relevant to this activity, first identify all entities needed from the text in order to capture the information and ideas in the text.
+Next, report all relationships among the identified entities.
+
+-Steps-
+1. Identify all entities. For each identified entity, extract the following information:
+- entity_name: Name of the entity, capitalized
+- entity_type: Suggest several labels or categories for the entity. The categories should not be specific, but should be as general as possible.
+- entity_description: Comprehensive description of the entity's attributes and activities
+Format each entity as ("entity"{tuple_delimiter}<entity_name>{tuple_delimiter}<entity_type>{tuple_delimiter}<entity_description>)
+
+2. From the entities identified in step 1, identify all pairs of (source_entity, target_entity) that are *clearly related* to each other.
+For each pair of related entities, extract the following information:
+- source_entity: name of the source entity, as identified in step 1
+- target_entity: name of the target entity, as identified in step 1
+- relationship_description: explanation as to why you think the source entity and the target entity are related to each other
+- relationship_strength: a numeric score indicating strength of the relationship between the source entity and target entity
+Format each relationship as ("relationship"{tuple_delimiter}<source_entity>{tuple_delimiter}<target_entity>{tuple_delimiter}<relationship_description>{tuple_delimiter}<relationship_strength>)
+
+3. Return output in English as a single list of all the entities and relationships identified in steps 1 and 2. Use **{record_delimiter}** as the list delimiter.
+
+4. If you have to translate into English, just translate the descriptions, nothing else!
+
+5. When finished, output {completion_delimiter}.
+
+-Examples-
+######################
+
+Example 1:
+
+text:
+18', '24', '36', '48' or '54'."
+                            ,
+                            "bandOperationMode": 
+                              "type": "string",
+                              "enum": [
+                                "2.4ghz",
+                                "5ghz",
+                                "6ghz",
+                                "dual",
+                                "multi"
+                              ],
+                              "description": "Choice between 'dual', '2.4ghz', '5ghz', '6ghz' or 'multi'."
+                            ,
+                            "bands": 
+                              "type": "object",
+                              "properties": 
+                                "enabled": 
+                                  "type": "array",
+                                  "items": 
+                                    "type": "string"
+                                  ,
+                                  "description": "List of enabled bands. Can include [\"2.4\", \"5\", \"6\", \"disabled\"]"
+                                
+                              ,
+                              "description": "Settings related to all bands"
+                            ,
+                            "bandSteeringEnabled": 
+                              "type": "boolean",
+                              "description": "Steers client to most open band between 2.4 GHz and 5 GHz. Can be either true or false."
+                            
+                          ,
+                          "description": "Settings for SSID 2"
+                        ,
+                        "3": 
+                          "type": "object",
+                          "properties": 
+                            "name": 
+                              "type": "string",
+                              "description": "Name of SSID"
+                            ,
+                            "minBitrate": 
+                              "type": "integer",
+                              "description": "Sets min bitrate (Mbps) of this SSID. Can be one of '1', '2', '5.5', '6', '9', '11', '12', '18', '24', '36', '48' or '54'."
+                            ,
+                            "bandOperationMode": 
+                              "type": "string",
+                              "enum": [
+                                "2.4ghz",
+                                "5ghz",
+                                "6ghz",
+                                "dual",
+                                "multi"
+                              ],
+                              "description": "Choice between 'dual', '2.4ghz', '5ghz', '6ghz' or 'multi'."
+                            ,
+                            "bands": 
+                              "type": "object",
+                              "properties": 
+                                "enabled": 
+                                  "type": "array",
+                                  "items": 
+                                    "type": "string"
+                                  ,
+                                  "description": "List of enabled bands. Can include [\"2.4\", \"5\", \"6\", \"disabled\"]"
+                                
+                              ,
+                              "description": "Settings related to all bands"
+                            ,
+                            "bandSteeringEnabled": 
+                              "type": "boolean",
+                              "description": "Steers client to most open band between 2.4 GHz and 5 GHz. Can be either true or false."
+                            
+                          ,
+                          "description": "Settings for SSID 3"
+                        ,
+                        "4": 
+                          "type": "object",
+                          "properties": 
+                            "name": 
+                              "type": "string",
+                              "description": "Name of SSID"
+                            ,
+                            "minBitrate": 
+                              "type": "integer",
+                              "description": "Sets min bitrate (Mbps) of this SSID. Can be one of '1', '2', '5.5', '6', '9', '11', '12', '18', '24', '36', '48' or '54'."
+                            ,
+                            "bandOperationMode": 
+                              "type": "string",
+                              "enum": [
+                                "2.4ghz",
+                                "5ghz",
+                                "6ghz",
+                                "dual",
+                                "multi"
+                              ],
+                              "description": "Choice between 'dual', '2.4ghz', '5ghz', '6ghz' or 'multi'."
+                            ,
+                            "bands": 
+                              "type": "object",
+                              "properties": 
+                                "enabled": 
+                                  "type": "array",
+                                  "items": 
+                                    "type": "string"
+                                  ,
+                                  "description": "List of enabled bands. Can include [\"2.4\", \"5\", \"6\", \"disabled\"]"
+                                
+                              ,
+                              "description": "Settings related to all bands"
+                            ,
+                            "bandSteeringEnabled": 
+                              "type": "boolean",
+                              "description": "Steers client to most open band between 2.4 GHz and 5 GHz. Can be either true or false."
+                            
+                          ,
+                          "description": "Settings for SSID 4"
+                        ,
+                        "5": 
+                          "type": "object",
+                          "properties": 
+                            "name": 
+                              "type": "string",
+                              "description": "Name of SSID"
+                            ,
+                            "minBitrate": 
+                              "type": "integer",
+                              "description": "Sets min bitrate (Mbps) of this SSID. Can be one of '1', '2', '5.5', '6', '9', '11', '12', '18', '24', '36', '48' or '54'."
+                            ,
+                            "bandOperationMode": 
+                              "type": "string",
+                              "enum": [
+                                "2.4ghz",
+                                "5ghz",
+                                "6ghz",
+                                "dual",
+                                "multi"
+                              ],
+                              "description": "Choice between 'dual', '2.4ghz', '5ghz', '6ghz' or 'multi'."
+                            ,
+                            "bands": 
+                              "type": "object",
+                              "properties": 
+                                "enabled": 
+                                  "type": "array",
+                                  "items": 
+                                    "type":
+------------------------
+output:
+("entity"{tuple_delimiter}BAND OPERATION MODE{tuple_delimiter}ATTRIBUTE{tuple_delimiter}Specifies the operational mode of wireless bands, such as '2.4ghz', '5ghz', '6ghz', 'dual', or 'multi', indicating how the device manages multiple frequency bands simultaneously or separately)
+{record_delimiter}
+("entity"{tuple_delimiter}BANDS{tuple_delimiter}ATTRIBUTE{tuple_delimiter}Settings related to all wireless bands, including a list of enabled bands like '2.4', '5', '6', or 'disabled', controlling which frequency bands are active)
+{record_delimiter}
+("entity"{tuple_delimiter}BAND STEERING ENABLED{tuple_delimiter}ATTRIBUTE{tuple_delimiter}Boolean setting indicating whether the device automatically directs clients to the most suitable band between 2.4 GHz and 5 GHz, optimizing network performance)
+{record_delimiter}
+("entity"{tuple_delimiter}SSID{tuple_delimiter}ORGANIZATION{tuple_delimiter}Wireless network identifier, each with specific settings such as name, minimum bitrate, band operation mode, enabled bands, and band steering status, representing different wireless network configurations (e.g., SSID 2, 3, 4, 5))
+{record_delimiter}
+("relationship"{tuple_delimiter}SSID 2{tuple_delimiter}BAND OPERATION MODE{tuple_delimiter}Defines the operational frequency mode for SSID 2, affecting which bands it operates on{tuple_delimiter}3)
+{record_delimiter}
+("relationship"{tuple_delimiter}SSID 2{tuple_delimiter}BANDS{tuple_delimiter}Specifies which bands are enabled for SSID 2, influencing its connectivity options{tuple_delimiter}3)
+{record_delimiter}
+("relationship"{tuple_delimiter}SSID 2{tuple_delimiter}BAND STEERING ENABLED{tuple_delimiter}Indicates if clients are automatically steered to the optimal band for SSID 2{tuple_delimiter}3)
+{record_delimiter}
+("relationship"{tuple_delimiter}SSID 3{tuple_delimiter}BAND OPERATION MODE{tuple_delimiter}Defines the operational mode for SSID 3, affecting its frequency band usage{tuple_delimiter}3)
+{record_delimiter}
+("relationship"{tuple_delimiter}SSID 3{tuple_delimiter}BANDS{tuple_delimiter}Lists enabled bands for SSID 3, controlling its frequency coverage{tuple_delimiter}3)
+{record_delimiter}
+("relationship"{tuple_delimiter}SSID 3{tuple_delimiter}BAND STEERING ENABLED{tuple_delimiter}Indicates if SSID 3 supports automatic client steering to the best band{tuple_delimiter}3)
+{record_delimiter}
+("relationship"{tuple_delimiter}SSID 4{tuple_delimiter}BAND OPERATION MODE{tuple_delimiter}Defines the operational mode for SSID 4, affecting its frequency band usage{tuple_delimiter}3)
+{record_delimiter}
+("relationship"{tuple_delimiter}SSID 4{tuple_delimiter}BANDS{tuple_delimiter}Lists enabled bands for SSID 4, controlling its frequency coverage{tuple_delimiter}3)
+{record_delimiter}
+("relationship"{tuple_delimiter}SSID 4{tuple_delimiter}BAND STEERING ENABLED{tuple_delimiter}Indicates if SSID 4 supports automatic client steering to the best band{tuple_delimiter}3)
+{record_delimiter}
+("relationship"{tuple_delimiter}SSID 5{tuple_delimiter}BAND OPERATION MODE{tuple_delimiter}Defines the operational mode for SSID 5, affecting its frequency band usage{tuple_delimiter}3)
+{record_delimiter}
+("relationship"{tuple_delimiter}SSID 5{tuple_delimiter}BANDS{tuple_delimiter}Lists enabled bands for SSID 5, controlling its frequency coverage{tuple_delimiter}3)
+{record_delimiter}
+("relationship"{tuple_delimiter}SSID 5{tuple_delimiter}BAND STEERING ENABLED{tuple_delimiter}Indicates if SSID 5 supports automatic client steering to the best band{tuple_delimiter}3)
+{completion_delimiter}
+#############################
+
+
+Example 2:
+
+text:
+                      
+                        "band": "5",
+                        "wifi": 
+                          "percentage": 33.12
+                        ,
+                        "nonWifi": 
+                          "percentage": 1.84
+                        ,
+                        "total": 
+                          "percentage": 34.96
+                        
+                      
+                    
+                  
+                
+              
+            ,
+            "headers": 
+              "Link": 
+                "schema": 
+                  "type": "string"
+                ,
+                "description": "A comma-separated list of first, last, prev, and next relative links used for subsequent paginated requests."
+              
+            
+          
+        ,
+        "summary": "Get average channel utilization across all bands for all networks in the organization",
+        "tags": [
+          "wireless",
+          "monitor",
+          "devices",
+          "channelUtilization",
+          "byNetwork"
+        ]
+      
+    ,
+    "/organizations/organizationId/wireless/devices/channelUtilization/history/byDevice/byInterval": 
+      "get": 
+        "description": "Get a time-series of average channel utilization for all bands, segmented by device.",
+        "operationId": "getOrganizationWirelessDevicesChannelUtilizationHistoryByDeviceByInterval",
+        "parameters": [
+          
+            "name": "organizationId",
+            "in": "path",
+            "description": "Organization ID",
+            "schema": 
+              "type": "string"
+            ,
+            "required": true
+          ,
+          
+            "name": "networkIds",
+            "in": "query",
+            "description": "Filter results by network.",
+            "schema": 
+              "type": "array",
+              "items": 
+                "type": "string"
+              
+            
+          ,
+          
+            "name": "serials",
+            "in": "query",
+            "description": "Filter results by device.",
+            "schema": 
+              "type": "array",
+              "items": 
+                "type": "string"
+              
+            
+          ,
+          
+            "name": "perPage",
+            "in": "query",
+            "description": "The number of entries per page returned. Acceptable range is 3 - 1000. Default is 1000.",
+            "schema": 
+              "type": "integer"
+            
+          ,
+          
+            "name": "startingAfter",
+            "in": "query",
+            "description": "A token used by the server to indicate the start of the page. Often this is a timestamp or an ID but it is not limited to those. This parameter should not be defined by client applications. The link for the first, last, prev, or next page in the HTTP Link header should define it.",
+            "schema": 
+              "type": "string"
+            
+          ,
+          
+            "name": "endingBefore",
+            "in": "query",
+            "description": "A token used by the server to indicate the end of the page. Often this is a timestamp or an ID but it is not limited to those. This parameter should not be defined by client applications. The link for the first, last, prev, or next page in the HTTP Link header should define it.",
+            "schema": 
+              "type": "string"
+            
+          ,
+          
+            "name": "t0",
+            "in": "query",
+            "description": "The beginning of the timespan for the data. The maximum lookback period is 31 days from today.",
+            "schema": 
+              "type": "string"
+            
+          ,
+          
+            "name": "t1",
+            "in": "query",
+            "description": "The end of the timespan for the data. t1 can be a maximum of 31 days after t0.",
+            "schema": 
+              "type": "string"
+            
+          ,
+          
+            "name": "timespan",
+            "in": "query",
+            "description": "The timespan for which the information will be fetched. If specifying timespan, do not specify parameters t0 and t1. The value must be in seconds and be less than or equal to 31 days. The default is 7 days.",
+            "schema": 
+              "type": "number",
+              "format": "float",
+              "maximum": 2678400
+            
+          ,
+          
+            "name": "interval",
+            "in": "query",
+            "description": "The time interval in seconds for returned data. The valid intervals are: 300, 600, 3600, 7200, 14400, 21600. The default is 3600.",
+            "schema": 
+              "type": "integer"
+            
+          
+        ],
+        "responses": 
+          "200": 
+            "description": "Successful operation",
+            "content": 
+              "application/json": 
+                "schema": 
+                  "type": "array",
+                  "items": 
+                    "type": "object",
+                    "properties": 
+                      "startTs": 
+                        "type": "string",
+                        "format": "date-time",
+                        "description": "The start time of the channel utilization interval."
+                      ,
+                      "endTs": 
+                        "type": "string",
+                        "format": "date-time",
+                        "description": "The end time of the channel utilization interval."
+                      ,
+                      "serial": 
+                        "type": "string",
+                        "description": "The serial number for the device."
+                      ,
+                      "mac": 
+                        "type": "string",
+                        "description": "The MAC address of the device."
+                      ,
+                      "network": 
+                        "type": "object",
+                        "properties": 
+                          "id": 
+                            "type": "string",
+                            "
+------------------------
+output:
+("entity"{tuple_delimiter}CHANNEL UTILIZATION{tuple_delimiter}METRIC{tuple_delimiter}Data representing the percentage of channel usage across wireless networks and devices, used for monitoring network performance and capacity planning)
+{record_delimiter}
+("entity"{tuple_delimiter}ORGANIZATION{tuple_delimiter}ENTITY{tuple_delimiter}A collective group or company that owns or manages multiple wireless networks and devices, overseeing their operation and performance)
+{record_delimiter}
+("entity"{tuple_delimiter}NETWORK{tuple_delimiter}ENTITY{tuple_delimiter}A specific wireless network within an organization, identified by network ID, comprising multiple devices and channels)
+{record_delimiter}
+("entity"{tuple_delimiter}DEVICE{tuple_delimiter}ENTITY{tuple_delimiter}A wireless device (such as access points or client devices) identified by serial number or MAC address, which participates in network communication and channel utilization)
+{record_delimiter}
+("entity"{tuple_delimiter}CHANNEL{tuple_delimiter}METRIC{tuple_delimiter}A specific frequency band or channel used by wireless devices for communication, monitored for utilization and performance)
+{record_delimiter}
+("entity"{tuple_delimiter}API_ENDPOINT{tuple_delimiter}SERVICE{tuple_delimiter}A specific API URL or service used to retrieve channel utilization data, supporting parameters like organization ID, device serials, network IDs, time intervals, and timespans)
+{record_delimiter}
+("entity"{tuple_delimiter}STAKEHOLDER{tuple_delimiter}PERSON/ORGANIZATION{tuple_delimiter}Individuals or groups responsible for managing, analyzing, or utilizing wireless network data, such as network administrators or service providers)
+{record_delimiter}
+("relationship"{tuple_delimiter}ORGANIZATION{tuple_delimiter}NETWORK{tuple_delimiter}An organization manages and owns multiple networks, each identified by a unique network ID{tuple_delimiter}9)
+{record_delimiter}
+("relationship"{tuple_delimiter}NETWORK{tuple_delimiter}DEVICE{tuple_delimiter}Devices are part of a network and contribute to its overall channel utilization{tuple_delimiter}8)
+{record_delimiter}
+("relationship"{tuple_delimiter}DEVICE{tuple_delimiter}CHANNEL{tuple_delimiter}Devices operate on specific channels, and their utilization is monitored to assess network performance{tuple_delimiter}8)
+{record_delimiter}
+("relationship"{tuple_delimiter}API_ENDPOINT{tuple_delimiter}ORGANIZATION{tuple_delimiter}The API endpoint is used by an organization to fetch network and device data for monitoring purposes{tuple_delimiter}7)
+{record_delimiter}
+("relationship"{tuple_delimiter}STAKEHOLDER{tuple_delimiter}ORGANIZATION{tuple_delimiter}Stakeholders such as network administrators or service providers utilize the data retrieved from the API to manage and optimize wireless networks{tuple_delimiter}6)
+{completion_delimiter}
+#############################
+
+
+
+-Real Data-
+######################
+text: {input_text}
+######################
+output:
