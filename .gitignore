@@ -1,5 +1,9 @@
 *venv*
 logs
+cache
+*.bin*
+*chroma_db*
+output
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
