@@ -55,7 +55,7 @@ async def read_VecDB(query: str) -> list[Document]:
     results: list[Document] = vector_store.similarity_search(query, k=4)
 
     return results
-
+"""
 if __name__ == "__main__":
     print("Reading No Base")
-    asyncio.run(read_graph("what api do i use to create an ssid"))
+    asyncio.run(read_graph("what api do i use to create an ssid"))"""
