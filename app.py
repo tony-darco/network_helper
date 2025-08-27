@@ -4,8 +4,9 @@ from dotenv import load_dotenv
 from langchain.chat_models import init_chat_model
 
 from nobase import read_nobase
+
 import mytools
-from mytools import post_network
+
 
 import streamlit as st
 import asyncio
@@ -58,7 +59,8 @@ if user_message:
     full_input = f"{system_prompt}\n\nUser message:\n\"\"\"{user_message}\"\"\""
 
     #response = model.invoke(full_input)
-    tool_model = model.bind_tools(tools=[post_network])
+    
+    tool_model = model.bind_tools(tools=mytools.__all__)
 
     messages = [
     *[
@@ -69,7 +71,8 @@ if user_message:
     messages.append(ai_msg)
 
     for tool_call in ai_msg.tool_calls:
-        selected_tool = {"NetworkCreate-tool": post_network,}[tool_call["name"]]
+        selected_tool = {str(n.name):n for n in mytools.__all__}[tool_call["name"]]
+        #selected_tool = {"NetworkCreate-tool": post_network,}[tool_call["name"]]
         tool_msg = selected_tool.invoke(tool_call)
         messages.append(tool_msg)
 

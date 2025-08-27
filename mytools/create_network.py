@@ -42,15 +42,6 @@ class PayloadModel(BaseModel):
     )
 
 
-# Define the payload for creating a new network
-def_payload:NetworkCreateModel = {
-        "name": "Streamlit Test Network",
-        "type": "wireless",  # You can specify the type of network, e.g., "wireless", "appliance", etc.
-        "tags": "streamlit, test",  # Optional tags
-        "timeZone": "America/Los_Angeles"  # Specify the time zone for the network
-    }
-
-
 def clean_payload(payload: json) -> json:
     """
     Removes any keys with null or None values from the payload
@@ -72,7 +63,7 @@ def clean_payload(payload: json) -> json:
     return payload
 
 
-@tool("NetworkCreate-tool", args_schema=PayloadModel, return_direct=True)
+@tool("post_network", args_schema=PayloadModel, return_direct=True)
 def post_network(payload):
     """Creates Merkai Networks"""
     # Convert Pydantic model to dict, then clean it
@@ -91,7 +82,6 @@ def post_network(payload):
     response = requests.post(url, headers=headers, json=cleaned_payload)
 
     # Check the response
-    print(response.text)
     if response.status_code == 201:
         return response.json()
     else:
