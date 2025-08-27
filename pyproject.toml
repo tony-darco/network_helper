@@ -1,0 +1,20 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "network_helper"
+version = "0.0.0"
+description = "Network helper utilities and tools"
+readme = "README.md"
+requires-python = ">=3.10.5"
+license = { text = "MIT" }
+authors = [
+    { name = "Tony Darco" }
+]
+dependencies = [
+]
+
+
+[tool.hatch.build.targets.wheel]
+packages = ["network_helper"]
