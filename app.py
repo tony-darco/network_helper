@@ -4,10 +4,12 @@ from dotenv import load_dotenv
 from langchain.chat_models import init_chat_model
 
 from nobase import read_nobase
+import mytools
+from mytools import post_network
 
 import streamlit as st
 import asyncio
-
+import time
 load_dotenv()
 
 api_key = os.environ.get("OPENAI_API_KEY")
@@ -47,7 +49,7 @@ if user_message:
     #create the python script to complete the task
     
     contxt = asyncio.run(read_nobase.read_VecDB(user_message))
-    print(contxt)
+    #print(contxt)
 
     system_prompt = f"""
     You are an assistant.
@@ -56,8 +58,24 @@ if user_message:
     full_input = f"{system_prompt}\n\nUser message:\n\"\"\"{user_message}\"\"\""
 
     #response = model.invoke(full_input)
-    response = model.invoke(full_input)
+    tool_model = model.bind_tools(tools=[post_network])
+
+    messages = [
+    *[
+        {"role": role, "content": msg} for role, msg in st.session_state.chat_history
+    ]
+    ]
+    ai_msg = tool_model.invoke(messages)
+    messages.append(ai_msg)
+
+    for tool_call in ai_msg.tool_calls:
+        selected_tool = {"NetworkCreate-tool": post_network,}[tool_call["name"]]
+        tool_msg = selected_tool.invoke(tool_call)
+        messages.append(tool_msg)
+
+    response = model.invoke(messages)
     assistant_reply = response.content
+    #print("done", assistant_reply, response ,time.time())
 
     st.chat_message("assistant").write(assistant_reply)
     st.session_state.chat_history.append(("assistant", assistant_reply))
