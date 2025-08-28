@@ -49,8 +49,7 @@ def clean_script(pyscript: str) -> str:
 def write_script(query:str, converstion:list):
     """Makes api calls to the meraki dashboard"""
     contxt_vec = asyncio.run(read_nobase.read_VecDB(query))
-    #contxt_grag = asyncio.run(read_nobase.read_graph(query))
-    print("got to run")
+    contxt_grag = asyncio.run(read_nobase.read_graph(query))
     
     swe_prompt = ChatPromptTemplate.from_template("""
     You are a software engineer. Given the user question and the context about the question. Return a python script to make the api call to fulfil the question. Use the information about the meraki network and organization to create the script.
@@ -63,6 +62,7 @@ def write_script(query:str, converstion:list):
 
     here the context about the question: 
     {contxt_vec} 
+    {contxt_grag}
 
     here is the request: {query}
                                                   
@@ -74,8 +74,7 @@ def write_script(query:str, converstion:list):
 
     swe_chain = swe_prompt | model
     
-    result = swe_chain.invoke({"contxt_vec":contxt_vec,
-                      "query":query,
+    result = swe_chain.invoke({"contxt_vec":contxt_vec,"contxt_grag":contxt_grag,"query":query,
                       })
     
     print(result)

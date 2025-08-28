@@ -117,7 +117,6 @@ if user_message:
         {"role": role, "content": msg} for role, msg in st.session_state.chat_history
     ]
     ]
-    #messages.append({"role": "assistant", "content": network_archive})
 
     ai_msg = tool_model.invoke(messages)
     messages.append(ai_msg)
@@ -138,7 +137,8 @@ if user_message:
 
         Here is some information about the network:{messages}
         
-        User message:{user_message}"""
+        User message:{user_message}
+        """
 
     response = model.invoke(full_input)
     assistant_reply = response.content
