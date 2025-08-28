@@ -84,7 +84,7 @@ def write_script(query:str, converstion:list):
 
     pyscript = clean_script(result.content)
     #save python script to temp file, run temp file and grab result
-    
+    execute_script_with_conditional_save(pyscript)
     with tempfile.NamedTemporaryFile(mode='w', suffix='.py', delete=False) as temp_script:
         temp_script.write(pyscript)
         temp_script_path = temp_script.name
@@ -107,3 +107,61 @@ def write_script(query:str, converstion:list):
     finally:
         os.remove(temp_script_path)
 
+def execute_script_with_conditional_save(pyscript, save_condition=None, **save_kwargs):
+    """
+    Execute script with custom save conditions.
+    
+    Args:
+        pyscript (str): Python script content
+        save_condition (callable): Function that takes (returncode, stdout, stderr) and returns bool
+        **save_kwargs: Additional arguments for saving (script_name, save_dir)
+    """
+    
+    with tempfile.NamedTemporaryFile(mode='w', suffix='.py', delete=False) as temp_script:
+        temp_script.write(pyscript)
+        temp_script_path = temp_script.name
+
+    try:
+        completed_process = subprocess.run(
+            ['python3', temp_script_path],
+            capture_output=True,
+            text=True,
+            check=False
+        )
+        
+        script_output = completed_process.stdout
+        script_error = completed_process.stderr
+        
+        print("Script Output:\n", script_output)
+        if script_error:
+            print("Script Error:\n", script_error)
+        
+        # Default save condition: successful execution (return code 0) and no stderr
+        if save_condition is None:
+            should_save = completed_process.returncode == 0 and not script_error
+        else:
+            should_save = save_condition(completed_process.returncode, script_output, script_error)
+        
+        if should_save:
+            save_dir = save_kwargs.get('save_dir', "/Users/tdarco/Documents/Projects/network_helper/mytools")
+            script_name = save_kwargs.get('script_name')
+            
+            os.makedirs(save_dir, exist_ok=True)
+            
+            if script_name is None:
+                timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+                script_name = f"script_{timestamp}.py"
+            elif not script_name.endswith('.py'):
+                script_name += '.py'
+            
+            saved_script_path = os.path.join(save_dir, script_name)
+            shutil.copy2(temp_script_path, saved_script_path)
+            
+            print(f"Script saved to: {saved_script_path}")
+            return True, script_output, script_error
+        
+        return False, script_output, script_error
+        
+    finally:
+        if os.path.exists(temp_script_path):
+            os.remove(temp_script_path)
